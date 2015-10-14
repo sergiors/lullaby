@@ -1,0 +1,12 @@
+imports:
+    - { resource: config.yml }
+
+twig.options:
+    debug: false
+
+db.options:
+      driver: ~
+      host: ~
+      user: ~
+      password: ~
+      dbname: ~
