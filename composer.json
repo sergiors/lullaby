@@ -20,7 +20,7 @@
     },
     "require": {
         "silex/silex": "~1.3",
-        "inbep/config-service-provider": "dev-master"
+        "inbep/config-service-provider": "~1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.5",

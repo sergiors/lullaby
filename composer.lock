@@ -4,20 +4,20 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6e4371664b93f1d86621eff16094cf21",
+    "hash": "e46f948aa1741f201afb2ad9d5ae280c",
     "packages": [
         {
             "name": "inbep/config-service-provider",
-            "version": "dev-master",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/inbep/config-service-provider.git",
-                "reference": "2b3b01da3b2cd596ac83db2aca101a6877ed0df0"
+                "reference": "fb74fc723418b3b3c3e73ae1e8019f6ef65f0b7c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/inbep/config-service-provider/zipball/2b3b01da3b2cd596ac83db2aca101a6877ed0df0",
-                "reference": "2b3b01da3b2cd596ac83db2aca101a6877ed0df0",
+                "url": "https://api.github.com/repos/inbep/config-service-provider/zipball/fb74fc723418b3b3c3e73ae1e8019f6ef65f0b7c",
+                "reference": "fb74fc723418b3b3c3e73ae1e8019f6ef65f0b7c",
                 "shasum": ""
             },
             "require": {
@@ -51,7 +51,7 @@
                     "email": "sergio@inbep.com.br"
                 }
             ],
-            "time": "2015-10-16 02:01:14"
+            "time": "2015-10-16 02:24:48"
         },
         {
             "name": "pimple/pimple",
@@ -2251,9 +2251,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "inbep/config-service-provider": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
