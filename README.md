@@ -21,7 +21,7 @@ class Application extends BaseApplication
 {
     public function registerConfiguration(LoaderInterface $loader)
     {
-        $loader->load($this->rootDir.'/app/config_'.$this->environment.'.yml');
+        $loader->load($this->getRootDir().'/app/config_'.$this->getEnvironment().'.yml');
     }
 }
 ```
