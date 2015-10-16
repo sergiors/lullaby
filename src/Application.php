@@ -2,12 +2,8 @@
 namespace Sergiors\Lullaby;
 
 use Silex\Application as BaseApplication;
-use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\LoaderInterface;
-use Symfony\Component\Config\Loader\LoaderResolver;
-use Symfony\Component\Config\Loader\DelegatingLoader;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
-use Sergiors\Lullaby\DependencyInjection\Loader\YamlFileLoader;
+use Inbep\Silex\Provider\ConfigServiceProvider;
 
 abstract class Application extends BaseApplication
 {
@@ -28,37 +24,37 @@ abstract class Application extends BaseApplication
      */
     public function __construct($environment, $rootDir, array $values = [])
     {
+        parent::__construct($values);
+
         $this->environment = $environment;
         $this->rootDir = $rootDir;
 
-        parent::__construct($values);
+        $this->register(new ConfigServiceProvider(), [
+            'config.replacements' => [
+                'root_dir' => $this->rootDir
+            ]
+        ]);
+
+    }
+
+    public function getRootDir()
+    {
+        return $this['config.parameters']->get('root_dir');
+    }
+
+    public function getEnvironment()
+    {
+        return $this->environment;
+    }
+
+    public function boot()
+    {
+        $this->registerConfiguration($this['config.loader']);
+        parent::boot();
     }
 
     /**
      * @param LoaderInterface $loader
      */
     abstract public function registerConfiguration(LoaderInterface $loader);
-
-    public function boot()
-    {
-        $this->registerConfiguration($this->getLoader());
-        parent::boot();
-    }
-
-    public function getParameters()
-    {
-        return new ParameterBag([
-            'root_dir' => $this->rootDir
-        ]);
-    }
-
-    protected function getLoader()
-    {
-        $locator = new FileLocator();
-        $resolver = new LoaderResolver([
-            new YamlFileLoader($this, $locator)
-        ]);
-
-        return new DelegatingLoader($resolver);
-    }
 }
