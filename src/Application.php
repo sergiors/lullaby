@@ -56,5 +56,5 @@ abstract class Application extends BaseApplication
     /**
      * @param LoaderInterface $loader
      */
-    abstract public function registerConfiguration(LoaderInterface $loader);
+    abstract protected function registerConfiguration(LoaderInterface $loader);
 }
