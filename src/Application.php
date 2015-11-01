@@ -3,8 +3,11 @@ namespace Sergiors\Lullaby;
 
 use Silex\Application as BaseApplication;
 use Symfony\Component\Config\Loader\LoaderInterface;
-use Inbep\Silex\Provider\ConfigServiceProvider;
+use Sergiors\Silex\Provider\ConfigServiceProvider;
 
+/**
+ * @author Sérgio Rafael Siquira <sergio@inbep.com.br>
+ */
 abstract class Application extends BaseApplication
 {
     /**
@@ -34,7 +37,6 @@ abstract class Application extends BaseApplication
                 'root_dir' => $this->rootDir
             ]
         ]);
-
     }
 
     public function getRootDir()
