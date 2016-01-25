@@ -1,4 +1,5 @@
 <?php
+
 namespace Sergiors\Lullaby\Tests;
 
 class ApplicationTest extends \PHPUnit_Framework_TestCase
@@ -20,6 +21,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $app['debug'] = true;
         $app['exception_handler']->disable();
         $app->boot();
+
         return $app;
     }
 }

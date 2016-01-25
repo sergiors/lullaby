@@ -1,4 +1,5 @@
 <?php
+
 namespace Sergiors\Lullaby;
 
 use Silex\Application as BaseApplication;
@@ -23,7 +24,7 @@ abstract class Application extends BaseApplication
     /**
      * @param string $environment
      * @param string $rootDir
-     * @param array $values|[]
+     * @param array  $values|[]
      */
     public function __construct($environment, $rootDir, array $values = [])
     {
@@ -34,8 +35,8 @@ abstract class Application extends BaseApplication
 
         $this->register(new ConfigServiceProvider(), [
             'config.replacements' => [
-                'root_dir' => $this->rootDir
-            ]
+                'root_dir' => $this->rootDir,
+            ],
         ]);
     }
 

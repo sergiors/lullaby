@@ -1,4 +1,5 @@
 <?php
+
 namespace Sergiors\Lullaby\Tests;
 
 use Sergiors\Lullaby\Application as BaseApplication;
