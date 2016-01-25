@@ -5,12 +5,15 @@ namespace Sergiors\Lullaby;
 use Silex\Application as BaseApplication;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Sergiors\Silex\Provider\ConfigServiceProvider;
+use Sergiors\Silex\Provider\DependencyInjectionServiceProvider;
 
 /**
  * @author Sérgio Rafael Siquira <sergio@inbep.com.br>
  */
 abstract class Application extends BaseApplication
 {
+    const LULLABY_VERSION = '1.0.0-DEV';
+
     /**
      * @var string
      */
@@ -33,6 +36,7 @@ abstract class Application extends BaseApplication
         $this->environment = $environment;
         $this->rootDir = $rootDir;
 
+        $this->register(new DependencyInjectionServiceProvider());
         $this->register(new ConfigServiceProvider(), [
             'config.replacements' => [
                 'root_dir' => $this->rootDir,
@@ -53,6 +57,8 @@ abstract class Application extends BaseApplication
     public function boot()
     {
         $this->registerConfiguration($this['config.loader']);
+        $this->registerServices($this['di.loader']);
+
         parent::boot();
     }
 
@@ -60,4 +66,9 @@ abstract class Application extends BaseApplication
      * @param LoaderInterface $loader
      */
     abstract protected function registerConfiguration(LoaderInterface $loader);
+
+    /**
+     * @param LoaderInterface $loader
+     */
+    abstract protected function registerServices(LoaderInterface $loader);
 }
