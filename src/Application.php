@@ -12,7 +12,7 @@ use Sergiors\Silex\Provider\DependencyInjectionServiceProvider;
  */
 abstract class Application extends BaseApplication
 {
-    const LULLABY_VERSION = '1.0.0-DEV';
+    const LULLABY_VERSION = '1.1.0-DEV';
 
     /**
      * @var string
