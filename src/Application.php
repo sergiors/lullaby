@@ -36,7 +36,7 @@ abstract class Application extends BaseApplication
         $this->environment = $environment;
         $this->rootDir = $rootDir;
 
-        $app['resolver'] = $this->share(function (Application $app) {
+        $this['resolver'] = $this->share(function (Application $app) {
             return new ControllerResolver($app, $app['logger']);
         });
 
