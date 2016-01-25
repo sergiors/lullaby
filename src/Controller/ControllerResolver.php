@@ -1,6 +1,6 @@
 <?php
 
-namespace Sergiors\Lullaby;
+namespace Sergiors\Lullaby\Controller;
 
 use Silex\ControllerResolver as BaseControllerResolver;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;

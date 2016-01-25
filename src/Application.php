@@ -4,6 +4,7 @@ namespace Sergiors\Lullaby;
 
 use Silex\Application as BaseApplication;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Sergiors\Lullaby\Controller\ControllerResolver;
 use Sergiors\Silex\Provider\ConfigServiceProvider;
 use Sergiors\Silex\Provider\DependencyInjectionServiceProvider;
 
