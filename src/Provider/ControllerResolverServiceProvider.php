@@ -2,10 +2,13 @@
 
 namespace Sergiors\Lullaby\Provider;
 
-use Sergiors\Lullaby\Controller\ControllerResolver;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
+use Sergiors\Lullaby\Controller\ControllerResolver;
 
+/**
+ * @author Sérgio Rafael Siquira <sergio@inbep.com.br>
+ */
 class ControllerResolverServiceProvider implements ServiceProviderInterface
 {
     public function register(Application $app)

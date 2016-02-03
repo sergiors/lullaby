@@ -48,7 +48,7 @@ abstract class Application extends BaseApplication
 
     public function getRootDir()
     {
-        return $this['config.parameters']->get('root_dir');
+        return $this->rootDir;
     }
 
     public function getEnvironment()
