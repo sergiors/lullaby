@@ -4,7 +4,7 @@ namespace Sergiors\Lullaby;
 
 use Silex\Application as BaseApplication;
 use Symfony\Component\Config\Loader\LoaderInterface;
-use Sergiors\Lullaby\Controller\ControllerResolver;
+use Sergiors\Lullaby\Provider\ControllerResolverServiceProvider;
 use Sergiors\Silex\Provider\ConfigServiceProvider;
 use Sergiors\Silex\Provider\DependencyInjectionServiceProvider;
 
@@ -37,11 +37,8 @@ abstract class Application extends BaseApplication
         $this->environment = $environment;
         $this->rootDir = $rootDir;
 
-        $this['resolver'] = $this->share(function (Application $app) {
-            return new ControllerResolver($app, $app['logger']);
-        });
-
         $this->register(new DependencyInjectionServiceProvider());
+        $this->register(new ControllerResolverServiceProvider());
         $this->register(new ConfigServiceProvider(), [
             'config.replacements' => [
                 'root_dir' => $this->rootDir,

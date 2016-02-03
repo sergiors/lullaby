@@ -15,6 +15,9 @@ abstract class Controller implements ContainerAwareInterface
      */
     protected $container;
 
+    /**
+     * {@inheritdoc}
+     */
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
