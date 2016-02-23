@@ -9,11 +9,11 @@ class Application extends BaseApplication
 {
     public function registerConfiguration(LoaderInterface $loader)
     {
-        $loader->load($this->getRootDir().'/app/config_'.$this->getEnvironment().'.yml');
+        $loader->load($this->getRootDir().'/Fixture/app/config_'.$this->getEnvironment().'.yml');
     }
 
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load($this->getRootDir().'/app/services.yml');
+        $loader->load($this->getRootDir().'/Fixture/app/services.yml');
     }
 }
