@@ -3,7 +3,6 @@
 namespace Sergiors\Lullaby;
 
 use Silex\Application as BaseApplication;
-use Symfony\Component\Config\Loader\LoaderInterface;
 use Sergiors\Lullaby\Provider\ControllerResolverServiceProvider;
 use Sergiors\Silex\Provider\ConfigServiceProvider;
 use Sergiors\Silex\Provider\DependencyInjectionServiceProvider;
@@ -11,7 +10,7 @@ use Sergiors\Silex\Provider\DependencyInjectionServiceProvider;
 /**
  * @author Sérgio Rafael Siquira <sergio@inbep.com.br>
  */
-abstract class Application extends BaseApplication
+abstract class Application extends BaseApplication implements ApplicationInterface
 {
     const LULLABY_VERSION = '1.1.0-DEV';
 
@@ -26,6 +25,11 @@ abstract class Application extends BaseApplication
     protected $rootDir;
 
     /**
+     * @var string
+     */
+    protected $cacheDir;
+
+    /**
      * @param string $environment
      * @param string $rootDir
      * @param array  $values|[]
@@ -36,41 +40,69 @@ abstract class Application extends BaseApplication
 
         $this->environment = $environment;
         $this->rootDir = $rootDir;
+        $this->cacheDir = $rootDir.'/cache/'.$environment;
 
-        $this->register(new DependencyInjectionServiceProvider());
+        $params = [
+            'root_dir' => $rootDir,
+            'environment' => $environment,
+            'debug' => (bool) $this['debug'],
+            'cache_dir' => $this->cacheDir
+        ];
+
         $this->register(new ControllerResolverServiceProvider());
+        $this->register(new DependencyInjectionServiceProvider(), [
+            'di.parameters' => $params
+        ]);
         $this->register(new ConfigServiceProvider(), [
-            'config.replacements' => [
-                'root_dir' => $this->rootDir,
-            ],
+            'config.replacements' => $params,
         ]);
     }
 
-    public function getRootDir()
-    {
-        return $this->rootDir;
-    }
-
+    /**
+     * {@inheritdoc}
+     */
     public function getEnvironment()
     {
         return $this->environment;
     }
 
-    public function boot()
+    /**
+     * {@inheritdoc}
+     */
+    public function isDebug()
     {
-        $this->registerConfiguration($this['config.loader']);
-        $this->registerServices($this['di.loader']);
-
-        parent::boot();
+        return (bool) $this['debug'];
     }
 
     /**
-     * @param LoaderInterface $loader
+     * {@inheritdoc}
      */
-    abstract protected function registerConfiguration(LoaderInterface $loader);
+    public function getRootDir()
+    {
+        return $this->rootDir;
+    }
 
     /**
-     * @param LoaderInterface $loader
+     * {@inheritdoc}
      */
-    abstract protected function registerServices(LoaderInterface $loader);
+    public function getCacheDir()
+    {
+        return $this->cacheDir;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getContainer()
+    {
+        return $this['di.container'];
+    }
+
+    public function boot()
+    {
+        $this->registerConfiguration($this['config.loader']);
+        $this->registerContainerConfiguration($this['di.loader']);
+
+        parent::boot();
+    }
 }

@@ -12,7 +12,7 @@ class Application extends BaseApplication
         $loader->load($this->getRootDir().'/app/config_'.$this->getEnvironment().'.yml');
     }
 
-    public function registerServices(LoaderInterface $loader)
+    public function registerContainerConfiguration(LoaderInterface $loader)
     {
         $loader->load($this->getRootDir().'/app/services.yml');
     }
