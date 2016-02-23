@@ -1,6 +1,6 @@
 <?php
 
-namespace Sergiors\Lullary\Console;
+namespace Sergiors\Lullaby\Console;
 
 use Sergiors\Lullaby\ApplicationInterface;
 use Symfony\Component\Console\Application as ApplicationBase;
@@ -13,8 +13,14 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
  */
 class Application extends ApplicationBase
 {
+    /**
+     * @var \Symfony\Component\DependencyInjection\ContainerInterface
+     */
     private $container;
 
+    /**
+     * @param ApplicationInterface $app
+     */
     public function __construct(ApplicationInterface $app)
     {
         $this->container = $app->getContainer();
