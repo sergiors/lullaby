@@ -40,22 +40,19 @@ abstract class Application extends BaseApplication implements ApplicationInterfa
 
         $this->environment = $environment;
         $this->rootDir = $rootDir;
-        $this->cacheDir = $rootDir.'/cache/'.$environment;
+        $this->cacheDir = $this->getCacheDir();
+        $this->debug = $this->isDebug();
 
-        $params = [
-            'root_dir' => $rootDir,
-            'environment' => $environment,
-            'debug' => (bool) $this['debug'],
+        $this->register(new ConfigServiceProvider());
+        $this->register(new DependencyInjectionServiceProvider());
+        $this->register(new ControllerResolverServiceProvider());
+
+        $this['config.replacements'] = $this['di.parameters'] = [
+            'root_dir' => $this->rootDir,
+            'environment' => $this->environment,
+            'debug' => $this->debug,
             'cache_dir' => $this->cacheDir
         ];
-
-        $this->register(new ControllerResolverServiceProvider());
-        $this->register(new DependencyInjectionServiceProvider(), [
-            'di.parameters' => $params
-        ]);
-        $this->register(new ConfigServiceProvider(), [
-            'config.replacements' => $params,
-        ]);
     }
 
     /**
@@ -87,7 +84,7 @@ abstract class Application extends BaseApplication implements ApplicationInterfa
      */
     public function getCacheDir()
     {
-        return $this->cacheDir;
+        return $this->rootDir.'/cache/'.$this->environment;
     }
 
     /**

@@ -17,8 +17,8 @@ class ControllerResolver extends BaseControllerResolver
     {
         $controller = parent::instantiateController($class);
 
-        if (isset($this->app['di']) && $controller instanceof ContainerAwareInterface) {
-            $controller->setContainer($this->app['di']);
+        if (isset($this->app['di.container']) && $controller instanceof ContainerAwareInterface) {
+            $controller->setContainer($this->app['di.container']);
         }
 
         return $controller;
