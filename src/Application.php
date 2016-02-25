@@ -20,6 +20,11 @@ abstract class Application extends BaseApplication implements ApplicationInterfa
     protected $environment;
 
     /**
+     * @var bool
+     */
+    protected $debug = false;
+
+    /**
      * @var string
      */
     protected $rootDir;
@@ -41,7 +46,7 @@ abstract class Application extends BaseApplication implements ApplicationInterfa
         $this->environment = $environment;
         $this->rootDir = $rootDir;
         $this->cacheDir = $this->getCacheDir();
-        $this->debug = $this->isDebug();
+        $this->debug = (bool) $this['debug'];
 
         $this->register(new ConfigServiceProvider());
         $this->register(new DependencyInjectionServiceProvider());
@@ -68,7 +73,7 @@ abstract class Application extends BaseApplication implements ApplicationInterfa
      */
     public function isDebug()
     {
-        return (bool) $this['debug'];
+        return $this->debug;
     }
 
     /**

@@ -2,6 +2,8 @@
 
 namespace Sergiors\Lullaby\Tests;
 
+use Sergiors\Lullaby\Tests\Fixture\Application;
+
 class ApplicationTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -15,12 +17,13 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(6, $app['db.options']);
 
         $this->assertEquals('dev', $app->getContainer()->getParameter('environment'));
-        $this->assertEquals(true, $app->getContainer()->getParameter('debug'));
+        $this->assertTrue($app->getContainer()->getParameter('debug'));
+        $this->assertTrue($app->isDebug());
     }
 
     public function createApplication()
     {
-        $app = new Application('dev', __DIR__, ['debug' => true]);
+        $app = new Application('dev', __DIR__, ['debug' => 1]);
         $app['exception_handler']->disable();
         $app->boot();
 

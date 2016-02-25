@@ -1,6 +1,6 @@
 <?php
 
-namespace Sergiors\Lullaby\Tests;
+namespace Sergiors\Lullaby\Tests\Fixture;
 
 use Sergiors\Lullaby\Application as BaseApplication;
 use Symfony\Component\Config\Loader\LoaderInterface;

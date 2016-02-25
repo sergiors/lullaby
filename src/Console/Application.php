@@ -16,7 +16,7 @@ class Application extends ApplicationBase
     /**
      * @var \Symfony\Component\DependencyInjection\ContainerInterface
      */
-    private $container;
+    protected $container;
 
     /**
      * @param ApplicationInterface $app
