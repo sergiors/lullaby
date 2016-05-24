@@ -8,7 +8,7 @@ use Sergiors\Silex\Provider\ConfigServiceProvider;
 use Sergiors\Silex\Provider\DependencyInjectionServiceProvider;
 
 /**
- * @author Sérgio Rafael Siquira <sergio@inbep.com.br>
+ * @author Sérgio Rafael Siqueira <sergio@inbep.com.br>
  */
 abstract class Application extends BaseApplication implements ApplicationInterface
 {
