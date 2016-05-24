@@ -24,7 +24,6 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     public function createApplication()
     {
         $app = new Application('dev', __DIR__, ['debug' => 1]);
-        $app['exception_handler']->disable();
         $app->boot();
 
         return $app;

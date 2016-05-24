@@ -10,8 +10,8 @@
     ],
     "require": {
         "php": ">=5.5",
-        "silex/silex": "~1.3",
-        "sergiors/config-service-provider": "~1.0",
+        "silex/silex": "^2",
+        "sergiors/config-service-provider": "~2",
         "sergiors/dependency-injection-service-provider": "dev-master"
     },
     "require-dev": {

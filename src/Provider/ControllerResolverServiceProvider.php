@@ -2,8 +2,8 @@
 
 namespace Sergiors\Lullaby\Provider;
 
-use Silex\Application;
-use Silex\ServiceProviderInterface;
+use Pimple\Container;
+use Pimple\ServiceProviderInterface;
 use Sergiors\Lullaby\Controller\ControllerResolver;
 
 /**
@@ -11,14 +11,10 @@ use Sergiors\Lullaby\Controller\ControllerResolver;
  */
 class ControllerResolverServiceProvider implements ServiceProviderInterface
 {
-    public function register(Application $app)
+    public function register(Container $app)
     {
-        $app['resolver'] = $app->share(function (Application $app) {
+        $app['resolver'] = function () use ($app) {
             return new ControllerResolver($app, $app['logger']);
-        });
-    }
-
-    public function boot(Application $app)
-    {
+        };
     }
 }

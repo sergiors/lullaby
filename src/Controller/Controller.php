@@ -6,7 +6,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * @author Sérgio Rafael Siquira <sergio@inbep.com.br>
+ * @author Sérgio Rafael Siqueira <sergio@inbep.com.br>
  */
 abstract class Controller implements ContainerAwareInterface
 {

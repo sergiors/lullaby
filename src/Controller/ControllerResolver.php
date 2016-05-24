@@ -6,7 +6,7 @@ use Silex\ControllerResolver as BaseControllerResolver;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 
 /**
- * @author Sérgio Rafael Siquira <sergio@inbep.com.br>
+ * @author Sérgio Rafael Siqueira <sergio@inbep.com.br>
  */
 class ControllerResolver extends BaseControllerResolver
 {
