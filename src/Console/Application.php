@@ -2,8 +2,9 @@
 
 namespace Sergiors\Lullaby\Console;
 
-use Sergiors\Lullaby\ApplicationInterface;
-use Symfony\Component\Console\Application as ApplicationBase;
+use Sergiors\Lullaby\KernelInterface;
+use Sergiors\Lullaby\Kernel;
+use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -11,21 +12,20 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 /**
  * @author Sérgio Rafael Siqueira <sergio@inbep.com.br>
  */
-class Application extends ApplicationBase
+class Application extends BaseApplication
 {
     /**
-     * @var \Symfony\Component\DependencyInjection\ContainerInterface
+     * @var KernelInterface
      */
-    protected $container;
+    protected $kernel;
 
     /**
-     * @param ApplicationInterface $app
+     * @param KernelInterface $kernel
      */
-    public function __construct(ApplicationInterface $app)
+    public function __construct(KernelInterface $kernel)
     {
-        $this->container = $app->getContainer();
-
-        parent::__construct('Lullaby', \Sergiors\Lullaby\Application::LULLABY_VERSION);
+        $this->kernel = $kernel;
+        parent::__construct('Lullaby', Kernel::LULLABY_VERSION);
     }
 
     /**
@@ -37,8 +37,10 @@ class Application extends ApplicationBase
     public function doRun(InputInterface $input, OutputInterface $output)
     {
         foreach ($this->all() as $command) {
-            if ($command instanceof ContainerAwareInterface) {
-                $command->setContainer($this->container);
+            if (isset($this->kernel['di.container'])
+                && $command instanceof ContainerAwareInterface
+            ) {
+                $command->setContainer($this->kernel['di.container']);
             }
         }
 

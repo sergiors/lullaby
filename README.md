@@ -12,23 +12,34 @@ How to use
 
 Something like this
 ```php
+namespace Acme\Acme\Apps\Fluffy;
+
+use Sergiors\Lullaby\Application\Application;
+
+class Fluffy extends Application
+{
+}
+```
+
+```php
 namespace Acme\Acme;
 
-use Sergiors\Lullaby\Applcation as BaseApplication;
-use Symfony\Component\Config\Loader\LoaderInterface;
+use Sergiors\Lullaby\Kernel;
 
-class Application extends BaseApplication
+class AppKernel extends Kernel
 {
-    public function registerConfiguration(LoaderInterface $loader)
+    public function registerApps()
     {
-        $loader->load($this->getRootDir().'/app/config_'.$this->getEnvironment().'.yml');
+        return [
+            new Fluffy()
+        ];
     }
 }
 ```
 
 In your index file
 ```php
-$app = new Acme\Acme\Application('dev', __DIR__);
+$app = new Acme\Acme\AppKernel('dev', __DIR__);
 $app->run();
 ```
 

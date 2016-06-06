@@ -11,7 +11,7 @@
     "require": {
         "php": ">=5.5",
         "silex/silex": "^2",
-        "sergiors/config-service-provider": "~2",
+        "sergiors/config-service-provider": "^2",
         "sergiors/dependency-injection-service-provider": "dev-master"
     },
     "require-dev": {
@@ -22,7 +22,8 @@
         "phploc/phploc": "~2.1",
         "phpmd/phpmd": "~2.2",
         "sebastian/phpcpd": "~2.0",
-        "squizlabs/php_codesniffer": "~2.1"
+        "squizlabs/php_codesniffer": "~2.1",
+        "twig/twig": "^1.24"
     },
     "autoload": {
         "psr-4": {
