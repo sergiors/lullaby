@@ -2,15 +2,17 @@
 
 namespace Sergiors\Lullaby\Application;
 
+use Pimple\Container;
+
 /**
  * @author Sérgio Rafael Siqueira <sergio@inbep.com.br>
  */
 interface ApplicationInterface
 {
     /**
-     * @param \Silex\Application $app
+     * @param Container $app
      */
-    public function boot(\Silex\Application $app);
+    public function boot(Container $app);
 
     /**
      * @return string

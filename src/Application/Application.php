@@ -2,6 +2,8 @@
 
 namespace Sergiors\Lullaby\Application;
 
+use Pimple\Container;
+
 /**
  * @author Sérgio Rafael Siqueira <sergio@inbep.com.br>
  */
@@ -20,7 +22,7 @@ abstract class Application implements ApplicationInterface
     /**
      * {@inheritdoc}
      */
-    public function boot(\Silex\Application $app)
+    public function boot(Container $app)
     {
     }
 
