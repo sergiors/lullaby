@@ -25,7 +25,6 @@ class Fluffy extends Application
 namespace Acme\Acme;
 
 use Sergiors\Lullaby\Kernel;
-use Symfony\Component\Config\Loader\LoaderInterface;
 
 class AppKernel extends Kernel
 {
