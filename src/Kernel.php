@@ -15,7 +15,7 @@ use Sergiors\Lullaby\Provider\DependencyInjectionBridgeServiceProvider;
  */
 abstract class Kernel extends Application implements KernelInterface
 {
-    const LULLABY_VERSION = '2.0.0-DEV';
+    const LULLABY_VERSION = '2.0.0';
 
     /**
      * @var ApplicationInterface[]
