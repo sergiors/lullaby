@@ -25,6 +25,7 @@ class Fluffy extends Application
 namespace Acme\Acme;
 
 use Sergiors\Lullaby\Kernel;
+use Acme\Acme\Apps\Fluffy\Fluffy;
 
 class AppKernel extends Kernel
 {
