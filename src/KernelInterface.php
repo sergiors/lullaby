@@ -13,27 +13,7 @@ interface KernelInterface
     public function registerApps();
 
     /**
-     * @return string
+     * @return \Silex\ServiceProviderInterface[]
      */
-    public function getEnvironment();
-
-    /**
-     * @return bool
-     */
-    public function isDebug();
-
-    /**
-     * @return string
-     */
-    public function getRootDir();
-
-    /**
-     * @return string
-     */
-    public function getCacheDir();
-
-    /**
-     * @return array
-     */
-    public function getApps();
+    public function registerProviders();
 }

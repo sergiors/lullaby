@@ -13,4 +13,9 @@ class TestKernel extends Kernel
             new Test()
         ];
     }
+
+    public function registerProviders()
+    {
+        return [];
+    }
 }
