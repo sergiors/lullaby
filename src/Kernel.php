@@ -15,7 +15,7 @@ use Sergiors\Lullaby\Provider\DependencyInjectionBridgeServiceProvider;
  */
 abstract class Kernel extends Application implements KernelInterface
 {
-    const LULLABY_VERSION = '2.0.0';
+    const LULLABY_VERSION = '2.0.1';
 
     /**
      * @var ApplicationInterface[]
@@ -97,8 +97,8 @@ abstract class Kernel extends Application implements KernelInterface
      */
     public function boot()
     {
-        $this->initializeApps();
         $this->initializeConfiguration();
+        $this->initializeApps();
 
         foreach ($this->apps as $app) {
             $app->boot($this);
