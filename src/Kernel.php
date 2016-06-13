@@ -15,7 +15,7 @@ use Sergiors\Lullaby\Provider\DependencyInjectionBridgeServiceProvider;
  */
 abstract class Kernel extends Application implements KernelInterface
 {
-    const LULLABY_VERSION = '2.0.1';
+    const LULLABY_VERSION = '2.1.0-dev';
 
     /**
      * @var ApplicationInterface[]
@@ -44,54 +44,10 @@ abstract class Kernel extends Application implements KernelInterface
         $this->register(new ConfigBridgeServiceProvider());
         $this->register(new DependencyInjectionBridgeServiceProvider());
 
+        $this->initializeProviders();
+
         $this['config.replacements'] = $this['di.parameters'] = $params;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getEnvironment()
-    {
-        return $this['environment'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isDebug()
-    {
-        return $this['debug'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRootDir()
-    {
-        if (!isset($this['root_dir'])) {
-            $reflObject = new \ReflectionObject($this);
-            $this['root_dir'] = dirname($reflObject->getFileName());
-        }
-
-        return $this['root_dir'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCacheDir()
-    {
-        return $this['cache_dir'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getApps()
-    {
-        return $this->apps;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -105,6 +61,16 @@ abstract class Kernel extends Application implements KernelInterface
         }
 
         parent::boot();
+    }
+
+    protected function getRootDir()
+    {
+        if (!isset($this['root_dir'])) {
+            $reflObject = new \ReflectionObject($this);
+            $this['root_dir'] = dirname($reflObject->getFileName());
+        }
+
+        return $this['root_dir'];
     }
 
     protected function initializeConfiguration()
@@ -123,5 +89,14 @@ abstract class Kernel extends Application implements KernelInterface
         $this['apps'] = array_map(function (ApplicationInterface $app) {
             return get_class($app);
         }, $this->apps);
+    }
+
+    protected function initializeProviders()
+    {
+        $providers = $this->registerProviders();
+
+        foreach ($providers as $provider) {
+            $this->register($provider);
+        }
     }
 }

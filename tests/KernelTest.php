@@ -9,19 +9,7 @@ class KernelTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function register()
-    {
-        $app = $this->createApplication();
-
-        $this->assertCount(1, $app['twig.options']);
-        $this->assertCount(6, $app['db.options']);
-
-        $this->assertEquals('dev', $app['di.container']->getParameter('environment'));
-        $this->assertTrue($app['di.container']->getParameter('debug'));
-        $this->assertTrue($app->isDebug());
-    }
-
-    public function createApplication()
+    public function shouldLoadYamlToContainer()
     {
         $app = new TestKernel('dev', true, __DIR__.'/Fixture/app');
         $app['config.options'] = [
@@ -29,6 +17,23 @@ class KernelTest extends \PHPUnit_Framework_TestCase
         ];
         $app->boot();
 
-        return $app;
+        $this->assertCount(1, $app['twig.options']);
+        $this->assertCount(6, $app['db.options']);
+
+        $this->assertEquals('dev', $app['di.container']->getParameter('environment'));
+        $this->assertTrue($app['di.container']->getParameter('debug'));
+        $this->assertTrue($app['debug']);
+        $this->assertEquals('dev', $app['environment']);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldReturnTotalApps()
+    {
+        $app = new TestKernel('dev', true, __DIR__.'/Fixture/app');
+        $app->boot();
+
+        $this->assertCount(1, $app['apps']);
     }
 }
