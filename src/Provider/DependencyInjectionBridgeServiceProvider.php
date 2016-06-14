@@ -14,7 +14,7 @@ class DependencyInjectionBridgeServiceProvider implements ServiceProviderInterfa
     {
         if (!isset($app['di.loader'])) {
             throw new \LogicException(
-                'You must register the DependencyInjectionServiceProvider to use the DependencyInjectionAdapterServiceProvider.'
+                'You must register the DependencyInjectionServiceProvider to use the DependencyInjectionBridgeServiceProvider.'
             );
         }
 
