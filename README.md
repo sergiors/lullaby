@@ -34,6 +34,11 @@ class AppKernel extends Kernel
             new Fluffy()
         ];
     }
+    
+    public function registerProviders()
+    {
+        return [];
+    }
 }
 ```
 
