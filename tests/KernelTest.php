@@ -24,6 +24,7 @@ class KernelTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($app['di.container']->getParameter('debug'));
         $this->assertTrue($app['debug']);
         $this->assertEquals('dev', $app['environment']);
+        $this->assertEquals(__DIR__.'/Fixture/app/cache/dev/proxy', $app['orm.proxy_dir']);
     }
 
     /**

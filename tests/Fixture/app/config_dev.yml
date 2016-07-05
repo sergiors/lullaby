@@ -4,6 +4,8 @@ imports:
 twig.options:
     debug: false
 
+orm.proxy_dir: %cache_dir%/proxy
+
 db.options:
       driver: ~
       host: ~

@@ -6,7 +6,7 @@ use Silex\Application;
 use Sergiors\Silex\Provider\ConfigServiceProvider;
 use Sergiors\Lullaby\Provider\ConfigBridgeServiceProvider;
 
-class ConfigAdapterServiceProviderTest extends \PHPUnit_Framework_TestCase
+class ConfigBridgeServiceProviderTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
@@ -16,6 +16,9 @@ class ConfigAdapterServiceProviderTest extends \PHPUnit_Framework_TestCase
         $app = $this->createApplication();
         $app->register(new ConfigServiceProvider());
         $app->register(new ConfigBridgeServiceProvider());
+        $app['config.replacements'] = [
+            'cache_dir' => sys_get_temp_dir()
+        ];
         $app['config.options'] = [
             'paths' => dirname(__DIR__).'/Fixture/app/config_dev.yml'
         ];
