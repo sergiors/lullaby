@@ -20,8 +20,6 @@ class KernelTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $app['twig.options']);
         $this->assertCount(6, $app['db.options']);
 
-        $this->assertEquals('dev', $app['di.container']->getParameter('environment'));
-        $this->assertTrue($app['di.container']->getParameter('debug'));
         $this->assertTrue($app['debug']);
         $this->assertEquals('dev', $app['environment']);
     }

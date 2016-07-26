@@ -21,6 +21,7 @@ class TwigBridgeServiceProvider implements ServiceProviderInterface
         $app['twig.loader.filesystem'] = $app->extend('twig.loader.filesystem', function (\Twig_Loader_Filesystem $loader) use ($app) {
             foreach ($app['apps'] as $namespace => $class) {
                 $path = $app['root_dir'].'/Resources/'.$namespace.'/views';
+                
                 if (is_dir($path)) {
                     $loader->addPath($path, $namespace);
                 }

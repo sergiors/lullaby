@@ -15,7 +15,7 @@ use Sergiors\Lullaby\Provider\DependencyInjectionBridgeServiceProvider;
  */
 abstract class Kernel extends Application implements KernelInterface
 {
-    const LULLABY_VERSION = '2.1.0-dev';
+    const LULLABY_VERSION = '2.1.1-dev';
 
     /**
      * @var ApplicationInterface[]
@@ -39,14 +39,11 @@ abstract class Kernel extends Application implements KernelInterface
         ]);
 
         $this->register(new ConfigServiceProvider());
-        $this->register(new DependencyInjectionServiceProvider());
-        $this->register(new ControllerResolverServiceProvider());
         $this->register(new ConfigBridgeServiceProvider());
-        $this->register(new DependencyInjectionBridgeServiceProvider());
 
         $this->initializeProviders();
 
-        $this['config.replacements'] = $this['di.parameters'] = $params;
+        $this['config.replacements'] = $params;
     }
     /**
      * {@inheritdoc}
@@ -76,7 +73,6 @@ abstract class Kernel extends Application implements KernelInterface
     protected function initializeConfiguration()
     {
         $this['config.initializer']();
-        $this['di.initializer']();
     }
 
     protected function initializeApps()

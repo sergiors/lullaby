@@ -11,12 +11,12 @@
     "require": {
         "php": ">=5.5",
         "silex/silex": "^2",
-        "sergiors/config-service-provider": "^2",
-        "sergiors/dependency-injection-service-provider": "dev-master"
+        "sergiors/config-service-provider": "^2"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4.5",
+        "phpunit/phpunit": "~4.8",
         "symfony/yaml": "~2.7|~3.0",
+        "symfony/console": "~2.7|~3.0",
         "pdepend/pdepend": "~2.0",
         "phing/phing": "~2.10",
         "phploc/phploc": "~2.1",
