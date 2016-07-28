@@ -9,9 +9,9 @@ class TestKernel extends Kernel
 {
     public function __construct($environment, $debug, $rootDir = null)
     {
-        $this['config.filenames'] = '%root_dir%/config_%environment%.yml';
-
         parent::__construct($environment, $debug, $rootDir);
+        
+        $this['config.filenames'] = '%root_dir%/config_%environment%.yml';
     }
 
     public function registerApps()

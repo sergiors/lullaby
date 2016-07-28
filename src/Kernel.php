@@ -33,9 +33,11 @@ abstract class Kernel extends Application implements KernelInterface
             'debug' => $debug
         ];
 
-        parent::__construct(array_merge($replacements, [
+        parent::__construct($replacements);
+
+        $this->register(new ConfigServiceProvider(), [
             'config.replacements' => $replacements
-        ]));
+        ]);
 
         $this->initializeApps();
         $this->initializeProviders();
@@ -85,7 +87,7 @@ abstract class Kernel extends Application implements KernelInterface
 
     protected function initializeProviders()
     {
-        $providers = array_merge([new ConfigServiceProvider()], $this->registerProviders());
+        $providers = $this->registerProviders();
 
         foreach ($providers as $provider) {
             $this->register($provider);

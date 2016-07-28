@@ -12,6 +12,7 @@ class KernelTest extends \PHPUnit_Framework_TestCase
     public function shouldLoadYamlToContainer()
     {
         $app = new TestKernel('dev', true, __DIR__.'/Fixtures/app');
+        $app->boot();
 
         $this->assertCount(1, $app['twig.options']);
         $this->assertCount(6, $app['db.options']);
