@@ -7,11 +7,11 @@ use Sergiors\Lullaby\Tests\Fixtures\Apps\Test\Test;
 
 class TestKernel extends Kernel
 {
-    public function __construct($environment, $debug, $rootDir = null)
+    public function __construct($env, $debug, $rootDir = null)
     {
-        parent::__construct($environment, $debug, $rootDir);
-        
-        $this['config.filenames'] = '%root_dir%/config_%environment%.yml';
+        parent::__construct($env, $debug, $rootDir);
+
+        $this['config.filenames'] = '%root_dir%/config_%env%.yml';
     }
 
     public function registerApps()

@@ -18,7 +18,7 @@ class KernelTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(6, $app['db.options']);
 
         $this->assertTrue($app['debug']);
-        $this->assertEquals('dev', $app['environment']);
+        $this->assertEquals('dev', $app['env']);
     }
 
     /**

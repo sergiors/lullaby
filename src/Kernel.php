@@ -19,24 +19,24 @@ abstract class Kernel extends Application implements KernelInterface
     protected $apps = [];
 
     /**
-     * @param array        $environment
+     * @param array        $env
      * @param bool         $debug
      * @param string|null  $rootDir
      */
-    public function __construct($environment, $debug = false, $rootDir = null)
+    public function __construct($env, $debug = false, $rootDir = null)
     {
         $rootDir = $rootDir ?: $this->getRootDir();
-        $replacements = [
-            'environment' => $environment,
+        $params = [
+            'env' => $env,
             'root_dir' => $rootDir,
-            'cache_dir' => $rootDir.'/cache/'.$environment,
+            'cache_dir' => $rootDir.'/cache/'.$env,
             'debug' => $debug
         ];
 
-        parent::__construct($replacements);
+        parent::__construct($params);
 
         $this->register(new ConfigServiceProvider(), [
-            'config.replacements' => $replacements
+            'config.replacements' => $params
         ]);
 
         $this->initializeApps();
