@@ -14,7 +14,7 @@ class TwigBridgeServiceProvider implements ServiceProviderInterface
     {
         if (!isset($app['twig'])) {
             throw new \LogicException(
-                'You must register the TwigServiceProvider to use the TwigAdapterServiceProvider.'
+                'You must register the TwigServiceProvider to use the TwigBridgeServiceProvider.'
             );
         }
 
