@@ -1,6 +1,6 @@
 <?php
 
-namespace Sergiors\Lullaby\Tests\Fixture\Apps\Test;
+namespace Sergiors\Lullaby\Tests\Fixtures\Apps\Test;
 
 use Sergiors\Lullaby\Application\Application;
 

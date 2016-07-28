@@ -3,7 +3,7 @@
 namespace Sergiors\Lullaby\Console;
 
 use Sergiors\Lullaby\Console\Application as ConsoleApplication;
-use Sergiors\Lullaby\Tests\Fixture\TestKernel;
+use Sergiors\Lullaby\Tests\Fixtures\TestKernel;
 
 class ApplicationTest extends \PHPUnit_Framework_TestCase
 {
@@ -22,9 +22,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
     public function createApplication()
     {
-        $app = new TestKernel('dev', dirname(__DIR__).'/Fixture');
-        $app->boot();
-
+        $app = new TestKernel('dev', false, dirname(__DIR__).'/Fixtures/app');
         return $app;
     }
 }

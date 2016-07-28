@@ -3,7 +3,7 @@
 namespace Sergiors\Lullaby\Tests\Provider;
 
 use Silex\Provider\TwigServiceProvider;
-use Sergiors\Lullaby\Tests\Fixture\TestKernel;
+use Sergiors\Lullaby\Tests\Fixtures\TestKernel;
 use Sergiors\Lullaby\Provider\TwigBridgeServiceProvider;
 
 class TwigBridgeServiceProviderTest extends \PHPUnit_Framework_TestCase
@@ -32,11 +32,7 @@ class TwigBridgeServiceProviderTest extends \PHPUnit_Framework_TestCase
 
     public function createApplication()
     {
-        $app = new TestKernel('dev', true, dirname(__DIR__).'/Fixture/app');
-        $app['config.options'] = [
-            'paths' => '%root_dir%/config_%environment%.yml'
-        ];
-        $app->boot();
+        $app = new TestKernel('dev', true, dirname(__DIR__).'/Fixtures/app');
 
         return $app;
     }

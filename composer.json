@@ -11,7 +11,7 @@
     "require": {
         "php": ">=5.5",
         "silex/silex": "^2",
-        "sergiors/config-service-provider": "^2"
+        "sergiors/config-service-provider": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.8",

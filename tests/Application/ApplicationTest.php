@@ -2,7 +2,7 @@
 
 namespace Sergiors\Lullaby\Tests\Applicaiton;
 
-use Sergiors\Lullaby\Tests\Fixture\Apps\Test\Test;
+use Sergiors\Lullaby\Tests\Fixtures\Apps\Test\Test;
 
 class ApplicationTest extends \PHPUnit_Framework_TestCase
 {
@@ -21,7 +21,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     public function shouldRetrunNamespace()
     {
         $app = new Test();
-        $this->assertEquals('Sergiors\Lullaby\Tests\Fixture\Apps\Test', $app->getNamespace());
+        $this->assertEquals('Sergiors\Lullaby\Tests\Fixtures\Apps\Test', $app->getNamespace());
     }
 
     /**
