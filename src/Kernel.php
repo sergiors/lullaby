@@ -65,12 +65,12 @@ abstract class Kernel extends Application implements KernelInterface
         return $this['root_dir'];
     }
 
-    final protected function initializeConfig()
+    protected function initializeConfig()
     {
         $this['config.initializer']();
     }
 
-    final protected function initializeApps()
+    protected function initializeApps()
     {
         $this->apps = array_reduce($this->registerApps(), function ($apps, ApplicationInterface $app) {
             $apps[$app->getName()] = $app;
@@ -83,7 +83,7 @@ abstract class Kernel extends Application implements KernelInterface
         }, $this->apps);
     }
 
-    final protected function initializeProviders()
+    protected function initializeProviders()
     {
         $providers = array_merge([new ConfigServiceProvider()], $this->registerProviders());
 
