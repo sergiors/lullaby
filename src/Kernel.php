@@ -37,8 +37,8 @@ abstract class Kernel extends Application implements KernelInterface
             'config.replacements' => $replacements
         ]));
 
-        $this->initializeProviders();
         $this->initializeApps();
+        $this->initializeProviders();
     }
 
     /**
@@ -46,6 +46,8 @@ abstract class Kernel extends Application implements KernelInterface
      */
     public function boot()
     {
+        $this->initializeConfig();
+
         foreach ($this->apps as $app) {
             $app->boot($this);
         }
@@ -63,10 +65,16 @@ abstract class Kernel extends Application implements KernelInterface
         return $this['root_dir'];
     }
 
-    protected function initializeApps()
+    final protected function initializeConfig()
+    {
+        $this['config.initializer']();
+    }
+
+    final protected function initializeApps()
     {
         $this->apps = array_reduce($this->registerApps(), function ($apps, ApplicationInterface $app) {
             $apps[$app->getName()] = $app;
+
             return $apps;
         }, []);
 
@@ -75,7 +83,7 @@ abstract class Kernel extends Application implements KernelInterface
         }, $this->apps);
     }
 
-    protected function initializeProviders()
+    final protected function initializeProviders()
     {
         $providers = array_merge([new ConfigServiceProvider()], $this->registerProviders());
 
