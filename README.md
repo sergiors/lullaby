@@ -4,7 +4,7 @@ Lullaby
 Install
 -------
 ```bash
-composer require sergiors/lullaby
+composer require sergiors/lullaby "dev-master"
 ```
 
 How to use

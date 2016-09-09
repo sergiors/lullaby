@@ -10,6 +10,8 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
+ * Just need if you want set the container in your commands
+ *
  * @author Sérgio Rafael Siqueira <sergio@inbep.com.br>
  */
 class Application extends BaseApplication

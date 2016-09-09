@@ -29,7 +29,7 @@ abstract class Application implements ApplicationInterface
     /**
      * {@inheritdoc}
      */
-    public function getNamespace()
+    final public function getNamespace()
     {
         $class = get_class($this);
         return substr($class, 0, strrpos($class, '\\'));
@@ -38,7 +38,7 @@ abstract class Application implements ApplicationInterface
     /**
      * {@inheritdoc}
      */
-    public function getPath()
+    final public function getPath()
     {
         if (null === $this->path) {
             $reflObject = new \ReflectionObject($this);

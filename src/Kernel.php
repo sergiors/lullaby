@@ -44,6 +44,8 @@ abstract class Kernel extends Application implements KernelInterface
     }
 
     /**
+     * Load configuration and boot the applications
+     *
      * {@inheritdoc}
      */
     public function boot()
@@ -57,6 +59,9 @@ abstract class Kernel extends Application implements KernelInterface
         parent::boot();
     }
 
+    /**
+     * @return string
+     */
     protected function getRootDir()
     {
         if (!isset($this['root_dir'])) {
