@@ -30,4 +30,14 @@ class KernelTest extends \PHPUnit_Framework_TestCase
 
         $this->assertCount(1, $app['apps']);
     }
+
+    /**
+     * @test
+     */
+    public function shouldReturnCacheDirDefinedByUser()
+    {
+        $app = new TestKernel('dev', true, __DIR__.'/Fixtures/app', __DIR__);
+
+        $this->assertEquals(__DIR__.'/cache/dev', $app['cache_dir']);
+    }
 }

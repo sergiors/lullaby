@@ -22,14 +22,17 @@ abstract class Kernel extends Application implements KernelInterface
      * @param array        $env
      * @param bool         $debug
      * @param string|null  $rootDir
+     * @param string|null  $varDir
      */
-    public function __construct($env, $debug = false, $rootDir = null)
+    public function __construct($env, $debug = false, $rootDir = null, $varDir = null)
     {
         $rootDir = $rootDir ?: $this->getRootDir();
+        $varDir = $varDir ?: $rootDir;
         $params = [
             'env' => $env,
             'root_dir' => $rootDir,
-            'cache_dir' => $rootDir.'/cache/'.$env,
+            'cache_dir' => $varDir.'/cache/'.$env,
+            'log_dir' => $varDir.'/logs/'.$env,
             'debug' => $debug
         ];
 
@@ -69,7 +72,7 @@ abstract class Kernel extends Application implements KernelInterface
             $this['root_dir'] = dirname($reflObject->getFileName());
         }
 
-        return $this['root_dir'];
+        return realpath($this['root_dir']) ?: $this['root_dir'];
     }
 
     protected function initializeConfig()
