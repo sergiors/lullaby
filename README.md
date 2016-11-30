@@ -44,7 +44,11 @@ class AppKernel extends Kernel
 
 In your index file
 ```php
-$app = new Acme\Acme\AppKernel('dev', __DIR__);
+$env = 'dev';
+$debug = false;
+$rootDir = __DIR__;
+
+$app = new Acme\Acme\AppKernel($env, $debug, $rootDir);
 $app->run();
 ```
 
