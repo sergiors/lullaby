@@ -3,7 +3,13 @@
 namespace Sergiors\Lullaby;
 
 use Silex\Application;
-use Sergiors\Silex\Provider\ConfigServiceProvider;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\Config\Loader\LoaderResolver;
+use Symfony\Component\Config\Loader\DelegatingLoader;
+use Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
+use Sergiors\Lullaby\Config\Loader\YamlFileLoader;
+use Sergiors\Lullaby\Config\Loader\PhpFileLoader;
+use Sergiors\Lullaby\Config\Loader\DirectoryLoader;
 use Sergiors\Lullaby\Application\ApplicationInterface;
 
 /**
@@ -12,6 +18,11 @@ use Sergiors\Lullaby\Application\ApplicationInterface;
 abstract class Kernel extends Application implements KernelInterface
 {
     const LULLABY_VERSION = '3.0.0-dev';
+
+    /**
+     * @var bool
+     */
+    protected $loaded = false;
 
     /**
      * @var ApplicationInterface[]
@@ -28,19 +39,17 @@ abstract class Kernel extends Application implements KernelInterface
     {
         $rootDir = $rootDir ?: $this->getRootDir();
         $varDir = $varDir ?: $rootDir;
-        $params = [
+
+        parent::__construct($params = [
             'env' => $env,
             'root_dir' => $rootDir,
             'cache_dir' => $varDir.'/cache/'.$env,
             'log_dir' => $varDir.'/logs/'.$env,
-            'debug' => $debug
-        ];
-
-        parent::__construct($params);
-
-        $this->register(new ConfigServiceProvider(), [
-            'config.replacements' => $params
+            'debug' => $debug,
         ]);
+
+        $this['config.filenames'] = [];
+        $this['config.replacements'] = $params;
 
         $this->initializeApps();
         $this->initializeProviders();
@@ -75,12 +84,37 @@ abstract class Kernel extends Application implements KernelInterface
         return realpath($this['root_dir']) ?: $this['root_dir'];
     }
 
-    protected function initializeConfig()
+    private function initializeConfig()
     {
-        $this['config.initializer']();
+        if ($this->loaded) {
+            return;
+        }
+
+        $this->loaded = true;
+
+        if ([] === $filenames = (array) $this['config.filenames']) {
+            return;
+        }
+
+        $parameterBag = new EnvPlaceholderParameterBag($this['config.replacements']);
+        $locator = new FileLocator();
+        $loaders = [
+            new PhpFileLoader($this, $locator),
+            new DirectoryLoader($locator),
+        ];
+
+        if (class_exists('Symfony\\Component\\Yaml\\Yaml')) {
+            $loaders[] = new YamlFileLoader($this, $parameterBag, $locator);
+        }
+
+        $loader = new DelegatingLoader(new LoaderResolver($loaders));
+
+        foreach ($filenames as $path) {
+            $loader->load($parameterBag->resolveValue($path));
+        }
     }
 
-    protected function initializeApps()
+    private function initializeApps()
     {
         $this->apps = array_reduce($this->registerApps(), function ($apps, ApplicationInterface $app) {
             $apps[$app->getName()] = $app;
@@ -93,7 +127,7 @@ abstract class Kernel extends Application implements KernelInterface
         }, $this->apps);
     }
 
-    protected function initializeProviders()
+    private function initializeProviders()
     {
         $providers = $this->registerProviders();
 

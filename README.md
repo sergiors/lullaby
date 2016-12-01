@@ -1,6 +1,8 @@
 Lullaby
 ------
 
+Lullaby is a layer on `Silex\Application`, it adds a better way to organize your project, like Symfony framework.
+
 Install
 -------
 ```bash
