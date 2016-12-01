@@ -17,7 +17,7 @@ use Sergiors\Lullaby\Application\ApplicationInterface;
  */
 abstract class Kernel extends Application implements KernelInterface
 {
-    const LULLABY_VERSION = '3.0.0-dev';
+    const LULLABY_VERSION = '3.0.0';
 
     /**
      * @var bool
