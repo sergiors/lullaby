@@ -17,7 +17,7 @@ use Sergiors\Lullaby\Application\ApplicationInterface;
  */
 abstract class Kernel extends Application implements KernelInterface
 {
-    const LULLABY_VERSION = '3.0.0';
+    const LULLABY_VERSION = '3.0.1-dev';
 
     /**
      * @var bool
@@ -30,7 +30,7 @@ abstract class Kernel extends Application implements KernelInterface
     protected $apps = [];
 
     /**
-     * @param array        $env
+     * @param string       $env
      * @param bool         $debug
      * @param string|null  $rootDir
      * @param string|null  $varDir
