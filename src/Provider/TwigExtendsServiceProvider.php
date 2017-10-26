@@ -8,13 +8,13 @@ use Pimple\ServiceProviderInterface;
 /**
  * @author Sérgio Rafael Siqueira <sergio@inbep.com.br>
  */
-class TwigBridgeServiceProvider implements ServiceProviderInterface
+class TwigExtendsServiceProvider implements ServiceProviderInterface
 {
     public function register(Container $app)
     {
         if (!isset($app['twig'])) {
             throw new \LogicException(
-                'You must register the TwigServiceProvider to use the TwigBridgeServiceProvider.'
+                'You must register the TwigServiceProvider to use the TwigExtendsServiceProvider.'
             );
         }
 

@@ -4,9 +4,9 @@ namespace Sergiors\Lullaby\Tests\Provider;
 
 use Silex\Provider\TwigServiceProvider;
 use Sergiors\Lullaby\Tests\Fixtures\TestKernel;
-use Sergiors\Lullaby\Provider\TwigBridgeServiceProvider;
+use Sergiors\Lullaby\Provider\TwigExtendsServiceProvider;
 
-class TwigBridgeServiceProviderTest extends \PHPUnit_Framework_TestCase
+class TwigExtendsServiceProviderTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
@@ -15,7 +15,7 @@ class TwigBridgeServiceProviderTest extends \PHPUnit_Framework_TestCase
     {
         $app = $this->createApplication();
         $app->register(new TwigServiceProvider());
-        $app->register(new TwigBridgeServiceProvider());
+        $app->register(new TwigExtendsServiceProvider());
 
         $this->assertCount(1, $app['twig.loader.filesystem']->getPaths('Test'));
     }
@@ -27,7 +27,7 @@ class TwigBridgeServiceProviderTest extends \PHPUnit_Framework_TestCase
     public function shouldThrowLogicException()
     {
         $app = $this->createApplication();
-        $app->register(new TwigBridgeServiceProvider());
+        $app->register(new TwigExtendsServiceProvider());
     }
 
     public function createApplication()
